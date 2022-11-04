@@ -2,6 +2,11 @@ language: java
 jdk:
   - openjdk8
 
+before_deploy:
+  - rvm requirements
+  - rvm install 2.6
+  - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
+
 script:
   - ./gradlew check
 
