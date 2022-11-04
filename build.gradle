@@ -14,6 +14,11 @@ bootJar {
 
 jar {
 	archiveClassifier.set('')
+	manifest {
+		attributes(
+				'Main-Class': 'com.weCode.bookStore.BookStoreApplication'
+		)
+	}
 }
 
 configurations {
