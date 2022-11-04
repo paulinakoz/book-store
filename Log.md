@@ -10,5 +10,6 @@ Dependencies added:
 - H2 Database
 
 Created the first rest controller which for now just displays a list of books.
+Added CI using Travis CI.
 Experienced a bug when trying to push the project to github as I was getting an authentication error
 but I resolved it by googling the error and implementing the recommended fix. 
