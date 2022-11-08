@@ -1,0 +1,1 @@
+insert into book(id, title, description, release_year) values ('662243ac-5f7a-11ed-9b6a-0242ac120013', 'test title', 'test description', 2018);

@@ -7,14 +7,14 @@ spring:
     hikari:
       connection-test-query: SELECT 1
 
-    jpa:
-      database: H2
-      show-sql: true
-      generate_ddl: true
-      hibernate:
-        ddl-auto: validate
+  jpa:
+    database: H2
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
 
-    flyway:
-      baseline-on-migrate: true
-      validate-on-migrate: true
+  flyway:
+    baseline-on-migrate: true
+    validate-on-migrate: true
 
