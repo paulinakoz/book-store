@@ -13,3 +13,17 @@ Created the first rest controller which for now just displays a list of books.
 Added CI using Travis CI.
 Experienced a bug when trying to push the project to github as I was getting an authentication error
 but I resolved it by googling the error and implementing the recommended fix. 
+
+## 4/11/22
+Today I worked on deploying the project to Heroku using Travis CI. Spent most of the day 
+trying to fix a bug as the deployment to Heroku wasn't working and I was getting an application error 
+when launching the app. Turns out I had the wrong jar file name in the Procfile, and it started working 
+when I changed it to the correct one. After I fixed this issue I created the frontend react app, installed
+all the dependancies and added it to github. 
+
+## 7/11/22
+Today I deployed the frontend app to Travis CI. I exprienced some of the similar issues when deploying as 
+I did previously so I already knew how to fix them. I then worked on creating a simple calculator app in Java 
+so that I could practice TDD. I added this to a repo which can be seen [here](https://github.com/paulinakoz/TDD-in-Java).
+
+## 8/11/22
