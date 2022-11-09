@@ -1,1 +1,0 @@
-insert into book(id, title, description, release_year) values ('662243ac-5f7a-11ed-9b6a-0242ac120002', 'Ikigai', 'The Japanese secret to a long and happy life', 2018);

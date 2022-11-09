@@ -27,3 +27,7 @@ I did previously so I already knew how to fix them. I then worked on creating a 
 so that I could practice TDD. I added this to a repo which can be seen [here](https://github.com/paulinakoz/TDD-in-Java).
 
 ## 8/11/22
+Today I worked on implementing the repository layer and the database in the application. I created the data model for Book and data 
+repository which will add and fetch data from the db. I also implemented Flyway for database migration and version control. I created
+a sql table corresponding to the book model, and added some configuration to connect the database with Flyway. I then 
+added some book data to the database. 
