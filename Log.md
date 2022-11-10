@@ -33,6 +33,8 @@ a sql table corresponding to the book model, and added some configuration to con
 added some book data to the database. 
 
 ## 9/11/22
-Today I worked on implementing the service layer in a test driven way by first writing the tests and then implementing the code. 
+Today I worked on implementing the service layer, which fetches books from the repository layer and converts the book model to book dto, 
+in a test driven way by first writing the tests and then implementing the code. I also implemented the controller using TDD, which fetches the
+book list from the service layer and displays it in the controller(localhost).
 
 ## 10/11/22
