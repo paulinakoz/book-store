@@ -5,18 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookDto {
+    private UUID id;
+
     private String title;
 
-    public String getTitle() {
-        return title;
-    }
+    private String description;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    private int releaseYear;
 }

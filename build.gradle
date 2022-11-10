@@ -25,9 +25,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.flywaydb:flyway-core:8.2.2'
 	implementation 'org.springframework.boot:spring-boot-starter-validation:2.4.0'
+	implementation 'org.modelmapper:modelmapper:2.4.4'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.mockito:mockito-core'
+	testImplementation 'org.assertj:assertj-core'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
