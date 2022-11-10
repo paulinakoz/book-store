@@ -39,3 +39,5 @@ book list from the service layer and displays it in the controller(localhost). I
 as intended. 
 
 ## 10/11/22
+Today I implemented Swagger UI. Swagger is an open source set of rules, specifications and tools which help users build, document, test and consume 
+RESTful web services.

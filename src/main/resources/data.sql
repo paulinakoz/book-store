@@ -1,2 +1,1 @@
-insert into book(id, title, description, release_year) values ('662243ac-5f7a-11ed-9b6a-0242ac120002', 'Ikigai', 'The Japanese secret to a long and happy life', 2018);
-insert into book(id, title, description, release_year) values ('a335b2d8-f674-4d98-9867-b60a66efef62','Eloquent JavaScript, Second Edition','JavaScript lies at the heart of almost every modern web application, from social apps to the newest browser-based games. Though simple for beginners to pick up and play with, JavaScript is a flexible, complex language that you can use to build full-scale applications.', 2014);
+insert into book(id, title, description, release_year) values ('c54b69a0-6108-11ed-9b6a-0242ac120002', 'Ikigai', 'The Japanese secret to a long and happy life', 2018);
