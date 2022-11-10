@@ -31,3 +31,8 @@ Today I worked on implementing the repository layer and the database in the appl
 repository which will add and fetch data from the db. I also implemented Flyway for database migration and version control. I created
 a sql table corresponding to the book model, and added some configuration to connect the database with Flyway. I then 
 added some book data to the database. 
+
+## 9/11/22
+Today I worked on implementing the service layer in a test driven way by first writing the tests and then implementing the code. 
+
+## 10/11/22

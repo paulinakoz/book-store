@@ -43,7 +43,7 @@ public class BookServiceTest {
                 .isNotNull()
                 .hasFieldOrPropertyWithValue("title", "test title")
                 .hasFieldOrPropertyWithValue("description", "test description")
-                .hasFieldOrPropertyWithValue("releaseYear", 2020);
+                .hasFieldOrPropertyWithValue("releaseYear", 2022);
     }
 
     private Book getbook() {
