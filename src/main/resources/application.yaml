@@ -7,6 +7,10 @@ spring:
     hikari:
       connection-test-query: SELECT 1
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   jpa:
     database: H2
     show-sql: true
