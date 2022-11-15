@@ -40,5 +40,14 @@ as intended.
 
 ## 10/11/22
 Today I implemented Swagger UI. Swagger is an open source set of rules, specifications and tools which help users build, document, test and consume 
-RESTful web services. I also created a production envionment and connected a postgresql databses hosted on heroku so now when the application is run on 
+RESTful web services. I also created a production envionment and connected a postgresql database hosted on heroku so now when the application is run on 
 local machine it connects with H2 database and when it's run on heroku (production) then it connects with postgresql database.
+
+## 11/11/22
+
+
+## 14/11/22
+Book Container, Book Filter UI components. Implement Redux, 
+
+## 15/11/22
+bookAction, bookService, bookReducer. Book List, book list item and tests. 
