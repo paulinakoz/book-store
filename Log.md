@@ -44,10 +44,15 @@ RESTful web services. I also created a production envionment and connected a pos
 local machine it connects with H2 database and when it's run on heroku (production) then it connects with postgresql database.
 
 ## 11/11/22
-
+Today I added Material UI to the frontend application which allows you to create responsive UI components and add styling to them. I then created the
+Layout and Header components in order to start building out the UI of the application. 
 
 ## 14/11/22
-Book Container, Book Filter UI components. Implement Redux, 
+Today I implemented the Book Container, which will display the list of books, and the Book Filter which will let you filter books by title. I also added 
+Redux to the application which manages and centralises application state. 
 
 ## 15/11/22
-bookAction, bookService, bookReducer. Book List, book list item and tests. 
+Today I implemeted bookSelector, bookAction, bookService and bookReducer in the frontend which work together to fetch book data from the server and then 
+display it in the book container. I also created Book List and Book List Item components which display the individual book data inside the book container.
+Additionally, wrote tests for all the functionality and components which I created. I also started implementing the search book by title functionality in 
+the backend so that it can be used in the Book Filter component. 
