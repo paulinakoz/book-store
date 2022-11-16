@@ -29,7 +29,7 @@ public class BookControllerTest {
         BookDto[] listOfBooks = testRestTemplate.getForObject(
                 "http://localhost:" + port + "/api/v1/books", BookDto[].class);
         assertThat(listOfBooks).isNotNull();
-        assertThat(listOfBooks.length).isEqualTo(2);
+        assertThat(listOfBooks.length).isEqualTo(18);
     }
 
     @Test

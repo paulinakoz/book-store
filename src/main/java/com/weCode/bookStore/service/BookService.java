@@ -23,6 +23,10 @@ public class BookService {
         this.modelMapper = modelMapper;
     }
 
+    private Function<Book, BookDto> convertBookModelToBookDto() {
+        return book -> modelMapper.map(book, BookDto.class);
+    }
+
     public List<BookDto> getBooks(){
         Iterable<Book> all = bookRepository.findAll();
         return StreamSupport.stream(all.spliterator(), false)
@@ -30,14 +34,15 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
-    private Function<Book, BookDto> convertBookModelToBookDto() {
-        return book -> modelMapper.map(book, BookDto.class);
-    }
-
     public List<BookDto> getBooksByTitle(String bookTitle) {
         List<Book> booksByTitle = bookRepository.findBooksByTitleIgnoreCase(bookTitle);
         return booksByTitle.stream()
                 .map(convertBookModelToBookDto())
                 .collect(Collectors.toList());
+    }
+
+    public BookDto addNewBook(Book book) {
+        bookRepository.save(book);
+        return modelMapper.map(book, BookDto.class);
     }
 }
