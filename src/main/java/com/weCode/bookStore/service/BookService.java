@@ -42,7 +42,21 @@ public class BookService {
     }
 
     public BookDto addNewBook(Book book) {
+        bookRepository.insert(book);
+        return modelMapper.map(book, BookDto.class);
+    }
+
+    public BookDto updateBook(Book book){
+        Book existingBook = bookRepository.findById(book.getId()).get();
+        existingBook.setDescription(book.getDescription());
+        existingBook.setTitle(book.getTitle());
+        existingBook.setAuthor(book.getAuthor());
         bookRepository.save(book);
         return modelMapper.map(book, BookDto.class);
+    }
+
+    public String deleteBook (String bookid){
+        bookRepository.deleteById(bookid);
+        return bookid;
     }
 }

@@ -65,7 +65,8 @@ public class BookServiceTest {
         return Book.builder()
                 .title("test title")
                 .description("test description")
-                .id(UUID.randomUUID())
+                .author("test author")
+                .id("test id")
                 .releaseYear(2022)
                 .build();
     }
@@ -74,7 +75,8 @@ public class BookServiceTest {
         return BookDto.builder()
                 .title("test title")
                 .description("test description")
-                .id(UUID.randomUUID())
+                .author("test author")
+                .id("test id")
                 .releaseYear(2022)
                 .build();
     }

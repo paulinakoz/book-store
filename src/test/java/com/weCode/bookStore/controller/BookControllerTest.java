@@ -50,7 +50,8 @@ public class BookControllerTest {
         return BookDto.builder()
                 .title("test title")
                 .description("test description")
-                .id(UUID.randomUUID())
+                .author("test author")
+                .id("test id")
                 .releaseYear(2022)
                 .build();
     }

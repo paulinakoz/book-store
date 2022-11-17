@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface BookRepository extends MongoRepository<Book, UUID> {
+public interface BookRepository extends MongoRepository<Book, String> {
     List<Book> findBooksByTitle(String title);
     List<Book> findBooksByTitleIgnoreCase(String title);
 }
