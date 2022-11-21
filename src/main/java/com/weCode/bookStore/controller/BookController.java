@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/books")
@@ -20,26 +19,42 @@ public class BookController {
 
     @GetMapping
     public ResponseEntity<List<BookDto>> getBooks() {
-        List<BookDto> books = bookService.getBooks();
-        return ResponseEntity.ok(books);
+        try {
+            List<BookDto> books = bookService.getBooks();
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{title}")
     public ResponseEntity<List<BookDto>> getBooksByTitle(@PathVariable("title") String title) {
-        List<BookDto> booksByTitle = bookService.getBooksByTitle(title);
-        return ResponseEntity.ok(booksByTitle);
+        try {
+            List<BookDto> booksByTitle = bookService.getBooksByTitle(title);
+            return new ResponseEntity<>(booksByTitle, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping
     public ResponseEntity<BookDto> addNewBook(@RequestBody Book book) {
-        BookDto newBook = bookService.addNewBook(book);
-        return ResponseEntity.status(201).body(newBook);
+        try {
+            BookDto newBook = bookService.addNewBook(book);
+            return new ResponseEntity<>(newBook, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping
     public ResponseEntity<BookDto> updateBook(@RequestBody Book book){
-        BookDto updatedBook = bookService.updateBook(book);
-        return ResponseEntity.status(201).body(updatedBook);
+        try {
+            BookDto updatedBook = bookService.updateBook(book);
+            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/{bookid}")
