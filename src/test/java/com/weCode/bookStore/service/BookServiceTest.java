@@ -30,26 +30,6 @@ public class BookServiceTest {
     @Mock
     private ModelMapper mapper;
 
-    private Book getBook() {
-        return Book.builder()
-                .title("test title")
-                .description("test description")
-                .author("test author")
-                .id("test id")
-                .releaseYear(2022)
-                .build();
-    }
-
-    private BookDto getBookDto() {
-        return BookDto.builder()
-                .title("test title")
-                .description("test description")
-                .author("test author")
-                .id("test id")
-                .releaseYear(2022)
-                .build();
-    }
-
     @Test
     void shouldReturnListOfBookDtoWhenGetBooksCalled() {
         List<Book> books = new ArrayList<>();
@@ -78,5 +58,25 @@ public class BookServiceTest {
 
         List<BookDto> bookDtoList = bookService.getBooksByTitle("test title");
         assertThat(bookDtoList.size()).isEqualTo(1);
+    }
+
+    private Book getBook() {
+        return Book.builder()
+                .title("test title")
+                .description("test description")
+                .author("test author")
+                .id("test id")
+                .releaseYear(2022)
+                .build();
+    }
+
+    private BookDto getBookDto() {
+        return BookDto.builder()
+                .title("test title")
+                .description("test description")
+                .author("test author")
+                .id("test id")
+                .releaseYear(2022)
+                .build();
     }
 }

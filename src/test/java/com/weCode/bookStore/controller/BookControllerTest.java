@@ -20,14 +20,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(BookService.class)
+@WebMvcTest(BookController.class)
 @ExtendWith(MockitoExtension.class)
 public class BookControllerTest {
 
@@ -67,15 +70,66 @@ public class BookControllerTest {
     @Test
     void shouldCreateNewBook() throws Exception {
         BookDto bookDto = getBookDto();
+        Book book = getBook();
 
-        mockMvc.perform(post("/api/v1/books").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(bookDto)))
+        when(bookService.addNewBook(any(Book.class))).thenReturn(bookDto);
+        ResponseEntity<BookDto> newBook = bookController.addNewBook(book);
+
+        mockMvc.perform(post("http://localhost:8080/api/v1/books").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(newBook)))
                 .andExpect(status().isCreated())
+                .andDo(print());
+    }
+
+    @Test
+    void shouldUpdateBook() throws Exception {
+        Book book = getBook();
+        BookDto updatedBook = getUpdatedBookDto();
+
+        when(bookService.updateBook(any(Book.class))).thenReturn(updatedBook);
+        ResponseEntity<BookDto> newBook = bookController.updateBook(book);
+
+        mockMvc.perform(put("http://localhost:8080/api/v1/books").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updatedBook)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value(updatedBook.getTitle()))
+                .andExpect(jsonPath("$.description").value(updatedBook.getDescription()))
+                .andDo(print());
+    }
+
+    @Test
+    void shouldDeleteBook() throws Exception {
+        BookDto bookDto = getBookDto();
+        String id = bookDto.getId();
+
+        doNothing().when(bookController).deleteBook(id);
+        mockMvc.perform(delete("http://localhost:8080/api/v1/books/{id}", id))
+                .andExpect(status().isNoContent())
                 .andDo(print());
     }
 
     private BookDto getBookDto() {
         return BookDto.builder()
+                .title("test title")
+                .description("test description")
+                .author("test author")
+                .id("test id")
+                .releaseYear(2022)
+                .build();
+    }
+
+    private BookDto getUpdatedBookDto() {
+        return BookDto.builder()
+                .title("test title 2")
+                .description("test description 2")
+                .author("test author")
+                .id("test id")
+                .releaseYear(2022)
+                .build();
+    }
+
+    private Book getBook() {
+        return Book.builder()
                 .title("test title")
                 .description("test description")
                 .author("test author")
