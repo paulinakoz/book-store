@@ -28,20 +28,11 @@ so that I could practice TDD. I added this to a repo which can be seen [here](ht
 
 ## 8/11/22
 Today I worked on implementing the repository layer and the database in the application. I created the data model for Book and data 
-repository which will add and fetch data from the db. I also implemented Flyway for database migration and version control. I created
-a sql table corresponding to the book model, and added some configuration to connect the database with Flyway. I then 
-added some book data to the database. 
+repository which will add and fetch data from the db. 
 
 ## 9/11/22
-Today I worked on implementing the service layer, which fetches books from the repository layer and converts the book model to book dto, 
-in a test driven way by first writing the tests and then implementing the code. I also implemented the controller using TDD, which fetches the
-book list from the service layer and displays it in the controller(localhost). I also added an integration test to test if the application works 
-as intended. 
-
-## 10/11/22
-Today I implemented Swagger UI. Swagger is an open source set of rules, specifications and tools which help users build, document, test and consume 
-RESTful web services. I also created a production envionment and connected a postgresql database hosted on heroku so now when the application is run on 
-local machine it connects with H2 database and when it's run on heroku (production) then it connects with postgresql database.
+Today I worked on implementing the service layer, which fetches books from the repository layer and converts the book model to book dto. 
+I also implemented the controller, which fetches the book list from the service layer and displays it in the controller(localhost).
 
 ## 11/11/22
 Today I added Material UI to the frontend application which allows you to create responsive UI components and add styling to them. I then created the
@@ -56,3 +47,13 @@ Today I implemeted bookSelector, bookAction, bookService and bookReducer in the 
 display it in the book container. I also created Book List and Book List Item components which display the individual book data inside the book container.
 Additionally, wrote tests for all the functionality and components which I created. I also started implementing the search book by title functionality in 
 the backend so that it can be used in the Book Filter component. 
+
+## 16/11/22
+Today I changed the H2, and SQL databases that I was originally using to a MongoDB database so I worked on creating and connecting the new database to the server. 
+
+## 17/11/22
+Today I decided to continue working on the backend server and I added functionality to the service and controller layers for creating a new book, updating 
+a book and deleting a book, I then tested this using Postman and all the requests work. 
+
+## 18/11/22
+Today I continued I added controller tests to all of the requests in the book controller and all of the tests pass. 

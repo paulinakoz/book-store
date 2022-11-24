@@ -46,7 +46,7 @@ public class BookService {
         return modelMapper.map(book, BookDto.class);
     }
 
-    public BookDto updateBook( Book book){
+    public BookDto updateBook(Book book){
         Book existingBook = bookRepository.findById(book.getId()).get();
         existingBook.setDescription(book.getDescription());
         existingBook.setTitle(book.getTitle());
@@ -55,8 +55,7 @@ public class BookService {
         return modelMapper.map(book, BookDto.class);
     }
 
-    public String deleteBook (String bookid){
+    public void deleteBook (String bookid){
         bookRepository.deleteById(bookid);
-        return bookid;
     }
 }

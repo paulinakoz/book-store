@@ -4,38 +4,29 @@ import com.weCode.bookStore.dto.BookDto;
 import com.weCode.bookStore.model.Book;
 import com.weCode.bookStore.service.BookService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
-@WebMvcTest(BookController.class)
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest
 public class BookControllerTest {
 
-    @InjectMocks
-    private BookController bookController;
+    @Autowired
+    private MockMvc mockMvc;
 
     @MockBean
     private BookService bookService;
@@ -43,27 +34,35 @@ public class BookControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private MockMvc mockMvc;
-
     @Test
-    void shouldReturnBookDtoListWhenGetBooksCalled() {
+    void shouldReturnBookDtoListWhenGetBooksCalled() throws Exception {
         List<BookDto> bookDtos = new ArrayList<>();
         bookDtos.add(getBookDto());
+        bookDtos.add(getBookDto());
         when(bookService.getBooks()).thenReturn(bookDtos);
-        ResponseEntity<List<BookDto>> books = bookController.getBooks();
-        assertThat(books.getBody()).isNotNull();
-        assertThat(books.getBody().size()).isEqualTo(1);
+
+        ResultActions response = mockMvc.perform(get("/api/v1/books"));
+
+        response.andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.size()",
+                        is(bookDtos.size())));
     }
 
     @Test
-    void shouldReturnBookDtoListWhenGetBooksByTitleCalled() {
+    void shouldReturnBookDtoListWhenGetBooksByTitleCalled() throws Exception {
         List<BookDto> bookDtos = new ArrayList<>();
-        bookDtos.add(getBookDto());
+        BookDto bookdto = getBookDto();
+        bookDtos.add(bookdto);
+        String title = bookdto.getTitle();
         when(bookService.getBooksByTitle(anyString())).thenReturn(bookDtos);
-        ResponseEntity<List<BookDto>> books = bookController.getBooksByTitle("test title");
-        assertThat(books.getBody()).isNotNull();
-        assertThat(books.getBody().size()).isEqualTo(1);
+
+        ResultActions response = mockMvc.perform(get("/api/v1/books/{title}", title));
+        response.andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$[0].title", is(bookdto.getTitle())))
+                .andExpect(jsonPath("$[0].description", is(bookdto.getDescription())))
+                .andExpect(jsonPath("$[0].author", is(bookdto.getAuthor())));
     }
 
 
@@ -73,12 +72,16 @@ public class BookControllerTest {
         Book book = getBook();
 
         when(bookService.addNewBook(any(Book.class))).thenReturn(bookDto);
-        ResponseEntity<BookDto> newBook = bookController.addNewBook(book);
 
-        mockMvc.perform(post("http://localhost:8080/api/v1/books").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(newBook)))
-                .andExpect(status().isCreated())
-                .andDo(print());
+        ResultActions response = mockMvc.perform(post("/api/v1/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(book)));
+
+        response.andDo(print()).
+                andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title", is(book.getTitle())))
+                .andExpect(jsonPath("$.description", is(book.getDescription())))
+                .andExpect(jsonPath("$.author", is(book.getAuthor())));
     }
 
     @Test
@@ -86,14 +89,13 @@ public class BookControllerTest {
         Book book = getBook();
         BookDto updatedBook = getUpdatedBookDto();
 
-        when(bookService.updateBook(any(Book.class))).thenReturn(updatedBook);
-        ResponseEntity<BookDto> newBook = bookController.updateBook(book);
+        when(bookService.updateBook(book)).thenReturn(updatedBook);
 
-        mockMvc.perform(put("http://localhost:8080/api/v1/books").contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(updatedBook)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value(updatedBook.getTitle()))
-                .andExpect(jsonPath("$.description").value(updatedBook.getDescription()))
+        ResultActions response = mockMvc.perform(put("/api/v1/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updatedBook)));
+
+        response.andExpect(status().isOk())
                 .andDo(print());
     }
 
@@ -102,39 +104,40 @@ public class BookControllerTest {
         BookDto bookDto = getBookDto();
         String id = bookDto.getId();
 
-        doNothing().when(bookController).deleteBook(id);
-        mockMvc.perform(delete("http://localhost:8080/api/v1/books/{id}", id))
-                .andExpect(status().isNoContent())
+        willDoNothing().given(bookService).deleteBook(id);
+        ResultActions response = mockMvc.perform(delete("/api/v1/books/{id}", id));
+
+        response.andExpect(status().isNoContent())
                 .andDo(print());
     }
 
     private BookDto getBookDto() {
         return BookDto.builder()
-                .title("test title")
-                .description("test description")
-                .author("test author")
-                .id("test id")
-                .releaseYear(2022)
+                .title("Ikigai")
+                .description("The Japanese secret to long and happy life")
+                .author("Francesc Miralles")
+                .id("1")
+                .releaseYear(2018)
                 .build();
     }
 
     private BookDto getUpdatedBookDto() {
         return BookDto.builder()
-                .title("test title 2")
-                .description("test description 2")
-                .author("test author")
-                .id("test id")
-                .releaseYear(2022)
+                .title("Awareness")
+                .description("Conversations with the Masters")
+                .author("Anthony de Mello")
+                .id("2")
+                .releaseYear(1990)
                 .build();
     }
 
     private Book getBook() {
         return Book.builder()
-                .title("test title")
-                .description("test description")
-                .author("test author")
-                .id("test id")
-                .releaseYear(2022)
+                .title("Ikigai")
+                .description("The Japanese secret to long and happy life")
+                .author("Francesc Miralles")
+                .id("1")
+                .releaseYear(2018)
                 .build();
     }
 }
