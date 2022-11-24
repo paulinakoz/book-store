@@ -53,6 +53,20 @@ I want to be able to delete it from the list
 
 ## Review and Roadmap
 Overall this project was realy interesting and I learned a lot of new things like building a SpringBoot application, using MongoDB and 
-using continous integration with Travis CI. 
-In the future I am planning to add more functionality to the server like keeping track of more information like a review of the book and
-what I liked/disliked about it. 
+using continous integration with Travis CI. The toughest challenge I faced with this project was the testing since I have not previously 
+tested a CRUD API built using SpringBoot. It took a lot of trial and error but eventually I managed to write passing tests for all of the
+requests in the controller. 
+
+If I was to do this project again, I would write the tests using TDD as I realise the importance of this development style. I would also add 
+more tests such as testing the service layer and adding integration tests to see if the application works well as a whole. Additionally, I would add more 
+functionality to the server like adding a review of the book and what I liked/disliked about it. Lastly, I would add more functionality to the frontend 
+so that users can add, update and delete books using the UI. 
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[Mongodb.com]:https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[Mongodb-url]: https://www.mongodb.com/
+[spring.io/projects/spring-boot.com]:https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
+[springboot-url]: https://spring.io/projects/spring-boot
+[Java.com]:https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white
+[Java-url]: https://www.java.com/en/

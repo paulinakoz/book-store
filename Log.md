@@ -56,4 +56,4 @@ Today I decided to continue working on the backend server and I added functional
 a book and deleting a book, I then tested this using Postman and all the requests work. 
 
 ## 18/11/22
-Today I continued I added controller tests to all of the requests in the book controller and all of the tests pass. 
+Today I added controller tests to all of the requests in the book controller and all of the tests pass. 
