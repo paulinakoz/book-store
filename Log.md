@@ -49,11 +49,12 @@ Additionally, wrote tests for all the functionality and components which I creat
 the backend so that it can be used in the Book Filter component. 
 
 ## 16/11/22
-Today I changed the H2, and SQL databases that I was originally using to a MongoDB database so I worked on creating and connecting the new database to the server. 
+Today I changed the PostgresSQl database that I was originally using to a MongoDB database so I worked on creating and connecting the new database to the server. 
+I am still using the H2 database for testing purposes. 
 
 ## 17/11/22
 Today I decided to continue working on the backend server and I added functionality to the service and controller layers for creating a new book, updating 
 a book and deleting a book, I then tested this using Postman and all the requests work. 
 
 ## 18/11/22
-Today I added controller tests to all of the requests in the book controller and all of the tests pass. 
+Today I added controller tests to all of the requests in the book controller and all of the tests are passing. Travis also successfully completes the build.  

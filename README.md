@@ -51,6 +51,12 @@ I want to be able to delete it from the list
 ### Server Architecture
 <img alt="app-architecture" src="./images/app-architecture.png" style="display: block;" />
 
+The backend server is a CRUD API which has GET, POST, PUT and DELETE functionality. For example, in order to display a list of books 
+the frontend sends a GET request to the controller, the controller then sends the request to the service layer which deals with all the business logic 
+and uses the repository layer to connect to the database and fulfil the request. The service layer also uses a data transfer object (DTO) to send the 
+request back to the controller and eventually the client. I decided to use the DTO to prevent the book model from being directly exposed to the client
+and to further decouple the business logic from the controller. 
+
 ## Review and Roadmap
 Overall this project was realy interesting and I learned a lot of new things like building a SpringBoot application, using MongoDB and 
 using continous integration with Travis CI. The toughest challenge I faced with this project was the testing since I have not previously 
