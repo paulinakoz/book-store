@@ -14,6 +14,7 @@ day, any blockers I encountered and how I solved them.
 * [![Java][Java.com]][Java-url]
 * [![SpringBoot][spring.io/projects/spring-boot.com]][springboot-url]
 * [![Mongodb][Mongodb.com]][Mongodb-url]
+* ![TravisCI](https://img.shields.io/badge/travis%20ci-%232B2F33.svg?style=for-the-badge&logo=travis&logoColor=white)
 
 ## User Stories
 ````
