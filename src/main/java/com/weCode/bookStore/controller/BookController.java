@@ -21,6 +21,9 @@ public class BookController {
     public ResponseEntity<List<BookDto>> getBooks() {
         try {
             List<BookDto> books = bookService.getBooks();
+            if(books.isEmpty()){
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
             return new ResponseEntity<>(books, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -31,6 +34,9 @@ public class BookController {
     public ResponseEntity<List<BookDto>> getBooksByTitle(@PathVariable("title") String title) {
         try {
             List<BookDto> booksByTitle = bookService.getBooksByTitle(title);
+            if(booksByTitle.isEmpty()){
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
             return new ResponseEntity<>(booksByTitle, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
